@@ -46,7 +46,7 @@ jobs:
           echo "Статус сканирования: успешно (SonarCloud)" >> report.txt
 
       - name: Upload report artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: quality-report
           path: report.txt
