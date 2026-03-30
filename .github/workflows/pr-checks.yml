@@ -34,7 +34,7 @@ jobs:
         with:
           args: >
             -Dsonar.organization=platon7002
-            -Dsonar.projectKey=platon7002_devops-project
+            -Dsonar.projectKey=Platon7002_devops-project
             -Dsonar.sources=.
             -Dsonar.python.version=3
 
