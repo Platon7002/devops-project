@@ -33,8 +33,8 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
           args: >
-            -Dsonar.organization=Platon7002
-            -Dsonar.projectKey=Platon7002_devops-project
+            -Dsonar.organization=platon7002
+            -Dsonar.projectKey=platon7002_devops-project
             -Dsonar.sources=.
             -Dsonar.python.version=3
 
