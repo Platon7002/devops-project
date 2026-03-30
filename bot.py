@@ -23,3 +23,4 @@ def send_telegram(message):
 if __name__ == "__main__":
     msg = sys.argv[1] if len(sys.argv) > 1 else "Тестовое сообщение"
     send_telegram(msg)
+# Feature: improved formatting
