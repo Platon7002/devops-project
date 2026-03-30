@@ -12,12 +12,12 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: '3.10'
 
@@ -33,10 +33,11 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
           args: >
-            -Dsonar.organization=platon7002
+            -Dsonar.organization=Platon7002
             -Dsonar.projectKey=Platon7002_devops-project
             -Dsonar.sources=.
             -Dsonar.python.version=3
+            -Dsonar.analysis.auto=false
 
       - name: Create report file
         run: |
@@ -51,6 +52,14 @@ jobs:
           name: quality-report
           path: report.txt
 
+      - name: Get latest release
+        id: get_release
+        run: |
+          RELEASE=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+            https://api.github.com/repos/${{ github.repository }}/releases/latest | \
+            jq -r .tag_name // "Нет релизов")
+          echo "release=$RELEASE" >> $GITHUB_OUTPUT
+
       - name: Send Telegram notification
         run: |
           python bot.py "$MESSAGE"
@@ -60,6 +69,7 @@ jobs:
           MESSAGE: |
             🚀 **Новый пулл‑реквест** 🚀
             Проект: ${{ github.repository }}
+            Выпуск: ${{ steps.get_release.outputs.release }}
             Ветка: `${{ github.event.pull_request.head.ref }}` → `${{ github.event.pull_request.base.ref }}`
             📅 Дата: $(date +'%Y.%m.%d %H:%M:%S')
             🔗 Ссылка на PR: ${{ github.event.pull_request.html_url }}
