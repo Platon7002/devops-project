@@ -62,10 +62,10 @@ jobs:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
           MESSAGE: |
-            🚀 **Новый пулл‑реквест** 🚀
+            Новый пулл-реквест
             Проект: ${{ github.repository }}
             Выпуск: ${{ steps.get_release.outputs.release }}
-            Ветка: `${{ github.event.pull_request.head.ref }}` → `${{ github.event.pull_request.base.ref }}`
-            📅 Дата: $(date +'%Y.%m.%d %H:%M:%S')
-            🔗 Ссылка на PR: ${{ github.event.pull_request.html_url }}
-            📂 Репозиторий: ${{ github.server_url }}/${{ github.repository }}
+            Ветка: ${{ github.event.pull_request.head.ref }} -> ${{ github.event.pull_request.base.ref }}
+            Дата: $(date +'%Y.%m.%d %H:%M:%S')
+            Ссылка на PR: ${{ github.event.pull_request.html_url }}
+            Репозиторий: ${{ github.server_url }}/${{ github.repository }}
